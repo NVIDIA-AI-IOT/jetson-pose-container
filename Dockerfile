@@ -33,11 +33,11 @@ FROM ${BASE_IMAGE}
 ENV DEBIAN_FRONTEND=noninteractive
 ENV SHELL /bin/bash
 
-WORKDIR /pose
+WORKDIR /pose_workdir
 
+ARG JUPYTER_WORKDIR=/workspace
 ARG JUPYTER_PASSWORD=jetson
 ENV JUPYTER_PASSWORD=${JUPYTER_PASSWORD}
-
 
 #
 # install pre-requisite packages
@@ -122,6 +122,15 @@ RUN cd /opt && \
 RUN python3 -m pip install git+https://github.com/ipython/traitlets@dead2b8cdde5913572254cf6dc70b5a6065b86f8
 
 
+# ================
+# INSTALL trt_pose
+# ================
+ENV TRTPOSE_REPO_DIR=$JUPYTER_WORKDIR
+RUN cd ${TRTPOSE_REPO_DIR} && \
+    git clone https://github.com/NVIDIA-AI-IOT/trt_pose && \
+    git checkout a89b422e0d72c4d537d7d4f39d03589f7ac236c0 && \
+    python3 setup.py install
+
 
 # ================
 # Pre-cache models 
@@ -139,7 +148,7 @@ EXPOSE 8888
 #
 # set jupyter auto-start command
 #
-CMD /bin/bash -c "jupyter lab --ip 0.0.0.0 --port 8888 --allow-root &> /var/log/jupyter.log" & \
+CMD /bin/bash -c "cd $JUPYTER_WORKDIR && jupyter lab --ip 0.0.0.0 --port 8888 --allow-root &> /var/log/jupyter.log" & \
 	echo "allow 10 sec for JupyterLab to start @ http://$(hostname -I | cut -d' ' -f1):8888 (password ${JUPYTER_PASSWORD})" && \
 	echo "JupterLab logging location:  /var/log/jupyter.log  (inside the container)" && \
 	/bin/bash

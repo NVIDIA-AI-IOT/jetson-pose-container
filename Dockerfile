@@ -45,7 +45,6 @@ ENV JUPYTER_PASSWORD=${JUPYTER_PASSWORD}
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
             cmake \
-            python3-opencv \
             curl \
     && rm -rf /var/lib/apt/lists/*
 

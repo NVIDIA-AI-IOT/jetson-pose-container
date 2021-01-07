@@ -29,4 +29,4 @@ This container has `trt_pose` installed and use it's pose estimation network.
 ## Output
 
 > PLANNED
-- ZMQ message (json format to be definned) publishing all the keypoints
+- ZMQ message (json format to be defined) publishing all the keypoints

@@ -39,6 +39,28 @@ ARG JUPYTER_PASSWORD=jetson
 ENV JUPYTER_PASSWORD=${JUPYTER_PASSWORD}
 
 
+#
+# install pre-requisite packages
+#
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+            cmake \
+            python3-opencv \
+            curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# pip dependencies for pytorch-ssd
+RUN pip3 install --verbose --upgrade Cython && \
+    pip3 install --verbose boto3 pandas
+
+# pip dependencies for trt_pose
+RUN pip3 install tqdm cython pycocotools
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+            python3-matplotlib \
+    && rm -rf /var/lib/apt/lists/*
+
+
 # install jetcam (lock to latest commit as of Sept 2020)
 #
 RUN git clone https://github.com/NVIDIA-AI-IOT/jetcam.git && \

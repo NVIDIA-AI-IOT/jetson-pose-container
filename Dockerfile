@@ -128,6 +128,7 @@ RUN python3 -m pip install git+https://github.com/ipython/traitlets@dead2b8cdde5
 ENV TRTPOSE_REPO_DIR=$JUPYTER_WORKDIR
 RUN cd ${TRTPOSE_REPO_DIR} && \
     git clone https://github.com/NVIDIA-AI-IOT/trt_pose && \
+    cd trt_pose && \
     git checkout a89b422e0d72c4d537d7d4f39d03589f7ac236c0 && \
     python3 setup.py install
 

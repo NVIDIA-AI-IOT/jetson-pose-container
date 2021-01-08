@@ -52,11 +52,11 @@ source $SCRIPTPATH/tag.sh
 
 # paths to some project directories
 
-DOCKER_ROOT="/pose"	# where the project resides inside docker
+DOCKER_ROOT="/pose_workdir"	# where the project resides inside docker
 
 # generate mount commands
 DATA_VOLUME="\
---volume $HOME:$DOCKER_ROOT"
+--volume $HOME:$DOCKER_ROOT/_host_home"
 
 # parse user arguments
 USER_VOLUME=""

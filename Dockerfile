@@ -160,6 +160,12 @@ RUN python3 -c "import torchvision; \
                 model = torchvision.models.resnet101(pretrained=True); \
                 model = torchvision.models.resnet152(pretrained=True) "
 
+# ================
+# misc
+# ================
+RUN apt-get install -y ssh
+
+
 # Jupyter listens on 8888.
 EXPOSE 8888
 

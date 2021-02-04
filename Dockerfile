@@ -122,6 +122,23 @@ RUN cd /opt && \
 RUN python3 -m pip install git+https://github.com/ipython/traitlets@dead2b8cdde5913572254cf6dc70b5a6065b86f8
 
 
+# =================
+# INSTALL torch2trt
+# =================
+ENV TORCH2TRT_REPO_DIR=$JUPYTER_WORKDIR
+RUN cd ${TORCH2TRT_REPO_DIR} && \
+    git clone https://github.com/NVIDIA-AI-IOT/torch2trt && \
+    cd torch2trt && \
+    python3 setup.py install --plugins
+
+# ========================================
+# Install other misc packages for trt_pose
+# ========================================
+RUN pip3 install tqdm cython pycocotools && \
+    apt-get install python3-matplotlib
+RUN pip3 install traitlets
+RUN pip3 install -U scikit-learn
+
 # ================
 # INSTALL trt_pose
 # ================

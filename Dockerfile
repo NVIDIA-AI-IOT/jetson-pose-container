@@ -139,6 +139,15 @@ RUN pip3 install tqdm cython pycocotools && \
 RUN pip3 install traitlets
 RUN pip3 install -U scikit-learn
 
+# =======================================================
+# Install packages neccesary for training trt_pose models
+# =======================================================
+ENV APEX_REPO_DIR=$JUPYTER_WORKDIR
+RUN cd ${APEX_REPO_DIR} && \
+    git clone https://github.com/NVIDIA/apex && \
+    cd apex && \
+    pip3 install -v --disable-pip-version-check --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+
 # ================
 # INSTALL trt_pose
 # ================
@@ -163,8 +172,12 @@ RUN python3 -c "import torchvision; \
 # ================
 # misc
 # ================
-RUN apt-get install -y ssh
-
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+            ssh \
+            vim \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip3 install pyzmq pynput
 
 # Jupyter listens on 8888.
 EXPOSE 8888

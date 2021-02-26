@@ -146,6 +146,7 @@ sudo docker run --runtime nvidia -it --rm --network host --privileged -e \
     -v /tmp/.X11-unix/:/tmp/.X11-unix \
     -v /tmp/argus_socket:/tmp/argus_socket \
     -v /dev/bus/usb:/dev/bus/usb \ 
+    --shm-size=4gb \
     $V4L2_DEVICES $DATA_VOLUME $USER_VOLUME \
     $CONTAINER_IMAGE $USER_COMMAND
 "
@@ -154,6 +155,7 @@ sudo docker run --runtime nvidia -it --rm --network host --privileged -e \
     -v /tmp/.X11-unix/:/tmp/.X11-unix \
     -v /tmp/argus_socket:/tmp/argus_socket \
     -v /dev/bus/usb:/dev/bus/usb \
+    --shm-size=4gb \
     $V4L2_DEVICES $DATA_VOLUME $USER_VOLUME \
     $CONTAINER_IMAGE $USER_COMMAND
 "

@@ -11,7 +11,7 @@ cd jetson-pose-container
 ./scripts/set_nvidia_runtime.sh
 ./scripts/copy-jetson-ota-key.sh
 ./build.sh
-./run.sh --container jetson-pose:trt_pose-0.0.1-r32.4.4
+./run.sh --container jetson-pose:r32.5.0
 ```
 
 ## Dependencies

@@ -10,8 +10,7 @@ git clone https://github.com/tokk-nv/jetson-pose-container
 cd jetson-pose-container
 ./scripts/set_nvidia_runtime.sh
 ./scripts/copy-jetson-ota-key.sh
-./build.sh
-./run.sh --container jetson-pose:r32.5.0
+sudo ./run.sh
 ```
 
 ## Dependencies

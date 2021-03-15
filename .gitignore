@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # OTA key to be copied to container
-.asc
+*.asc

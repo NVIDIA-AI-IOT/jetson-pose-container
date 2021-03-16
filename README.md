@@ -12,20 +12,3 @@ cd jetson-pose-container
 ./scripts/copy-jetson-ota-key.sh
 sudo ./run.sh
 ```
-
-## Dependencies
-
-> PLANNED
-This container has `trt_pose` installed and use it's pose estimation network.
-
-[`trt_pose`](https://github.com/NVIDIA-AI-IOT/trt_pose)
-
-## Input
-
-> PLANNED
-- CSI camera (IMX219)
-
-## Output
-
-> PLANNED
-- ZMQ message (json format to be defined) publishing all the keypoints

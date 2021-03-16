@@ -18,7 +18,11 @@ SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 source ${SCRIPTPATH}/tools/l4t-version.sh
 
 if [ -z $BASE_IMAGE ]; then
-	if [ $L4T_VERSION = "32.4.4" ]; then
+	if [ $L4T_VERSION = "32.5.1" ]; then
+		BASE_IMAGE="nvcr.io/nvidia/l4t-pytorch:r32.5.0-pth1.6-py3"
+	elif [ $L4T_VERSION = "32.5.0" ]; then
+		BASE_IMAGE="nvcr.io/nvidia/l4t-pytorch:r32.5.0-pth1.6-py3"
+	elif [ $L4T_VERSION = "32.4.4" ]; then
 		BASE_IMAGE="nvcr.io/nvidia/l4t-pytorch:r32.4.4-pth1.6-py3"
 	elif [ $L4T_VERSION = "32.4.3" ]; then
 		BASE_IMAGE="nvcr.io/nvidia/l4t-pytorch:r32.4.3-pth1.6-py3"
@@ -35,7 +39,7 @@ fi
 
 DOCKER_REPO="jetson-pose"
 POSE_VERSION="trt_pose-0.0.1"
-TAG="$POSE_VERSION-r$L4T_VERSION"
+TAG="r$L4T_VERSION"
 
 echo "BASE_IMAGE=$BASE_IMAGE"
 echo "TAG=$TAG"

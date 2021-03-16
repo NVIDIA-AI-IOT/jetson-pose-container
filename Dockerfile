@@ -139,6 +139,12 @@ RUN pip3 install tqdm cython pycocotools && \
 RUN pip3 install traitlets
 RUN pip3 install -U scikit-learn
 
+# ==============================================
+# Install other misc packages for point_detector
+# ==============================================
+RUN pip3 install tensorboard
+RUN pip3 install segmentation-models-pytorch
+
 # =======================================================
 # Install packages neccesary for training trt_pose models
 # =======================================================

@@ -47,6 +47,8 @@ die() {
     exit 1
 }
 
+echo "CHECK"
+
 # find container tag from L4T version
 source $SCRIPTPATH/tag.sh
 
@@ -138,23 +140,25 @@ done
 echo "V4L2_DEVICES:  $V4L2_DEVICES"
 
 # run the container
-sudo xhost +si:localuser:root
+#sudo xhost +si:localuser:root
 
 
 echo "
-sudo docker run --runtime nvidia -it --rm --network host --privileged -e \
+docker run --runtime nvidia -it --rm --network host --privileged -e \
     -v /tmp/.X11-unix/:/tmp/.X11-unix \
     -v /tmp/argus_socket:/tmp/argus_socket \
     -v /dev/bus/usb:/dev/bus/usb \ 
+    -p 8888:8888 -p 6006:6006 \
     --shm-size=4gb \
     $V4L2_DEVICES $DATA_VOLUME $USER_VOLUME \
     $CONTAINER_IMAGE $USER_COMMAND
 "
 
-/bin/bash -c "sudo docker run --runtime nvidia -it --rm --network host --privileged \
+/bin/bash -c "docker run --runtime nvidia -it --rm --network host --privileged \
     -v /tmp/.X11-unix/:/tmp/.X11-unix \
     -v /tmp/argus_socket:/tmp/argus_socket \
     -v /dev/bus/usb:/dev/bus/usb \
+    -p 8888:8888 -p 6006:6006 \
     --shm-size=4gb \
     $V4L2_DEVICES $DATA_VOLUME $USER_VOLUME \
     $CONTAINER_IMAGE $USER_COMMAND
